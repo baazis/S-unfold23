@@ -139,14 +139,15 @@ export default function Home() {
             <span className="bg-clip-text text-3xl  text-transparent bg-gradient-to-r from-blue-500 to-teal-400">
               Startup Space{" "}
             </span>
-            Clone built on top of Polygon network, allow users to create, share
-            and view images.
+            <br/>
+            <br></br>
+            An Ideation space for new upcoming developers of Blockchain.
           </p>
           <button
             onClick={connectWallet}
             className="items-center bg-gradient-to-r from-blue-500 to-teal-400 rounded-full font-medium p-4 shadow-lg"
           >
-            Connect Wallet
+            Connect Your Favourite Wallet
           </button>
         </section>
       ) : (
