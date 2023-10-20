@@ -137,7 +137,7 @@ export default function Home() {
             data-aos-delay="150"
           >
             <span className="bg-clip-text text-3xl  text-transparent bg-gradient-to-r from-blue-500 to-teal-400">
-              Decentralized Instagram{" "}
+              Startup Space{" "}
             </span>
             Clone built on top of Polygon network, allow users to create, share
             and view images.
