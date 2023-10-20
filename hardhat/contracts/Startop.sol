@@ -21,7 +21,7 @@ contract Startup {
         string text;
     }
 
-    // Define a structure for media content (video or photo).
+    // Define a structure for media content (video or photo). for multiple media type
     struct Media {
         string mediaHash; // IPFS hash for the media content.
         string mediaType; // Type of media (e.g., "video" or "photo").
