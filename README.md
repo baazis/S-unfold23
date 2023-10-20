@@ -3,8 +3,7 @@
 
 
 
-## Title: Revolutionizing Startup Collaboration: The Future of Tech Innovation
-
+## Title: Revolutionizing Startup Collaboration
 ## Introduction:
 We are thrilled to introduce you to a game-changing opportunity in the world of tech innovation – a decentralized platform designed to foster collaboration, innovation, and team formation for startups, tech enthusiasts, and even recruiters. With a growing demand for creative solutions and talented teams in the tech industry, our platform aims to reshape the way ideas are shared, projects are formed, and innovation thrives.
 
@@ -45,3 +44,10 @@ We're committed to addressing legal issues such as intellectual property rights 
 
 In summary, our decentralized platform is poised to disrupt the startup and tech collaboration landscape. By addressing common challenges in idea sharing, team formation, and innovation, we are creating a valuable resource for tech enthusiasts, startups, and recruiters. We invite you to join us on this journey as we shape the future of tech innovation and collaboration. Together, we can drive tech ecosystems to new heights while delivering impressive returns on your investment. Don't miss the opportunity to be part of this groundbreaking endeavor.
 
+## How much are we able to build ?
+
+During this hackathon, we've managed to bring to life a streamlined version of our initial concept. As active participants in this event, we've observed people engaging in various activities, including capturing moments through photographs. Inspired by this, we've developed a platform where all participants can come together and interact, adding an extra layer of connectivity to Unfold 2023.
+
+Our deployed decentralized application (dapp) serves as a hub for participants to share their event photos, allowing them to contribute their unique perspectives and memories to the collective experience. Here, individuals from the Unfold 2023 community can seamlessly connect, engage in discussions, express their preferences by liking or disliking photos, and even offer tips to fellow contributors.
+
+To infuse an extra layer of excitement into the mix, we've introduced a special incentive. The photos that garner the most likes and tips will stand a chance to win an exclusive prize, making it an even more engaging and rewarding experience for everyone involved. So, let's continue to celebrate the spirit of Unfold 2023 by sharing and connecting through the lens of our shared experiences!
