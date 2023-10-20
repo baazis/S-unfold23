@@ -51,3 +51,16 @@ During this hackathon, we've managed to bring to life a streamlined version of o
 Our deployed decentralized application (dapp) serves as a hub for participants to share their event photos, allowing them to contribute their unique perspectives and memories to the collective experience. Here, individuals from the Unfold 2023 community can seamlessly connect, engage in discussions, express their preferences by liking or disliking photos, and even offer tips to fellow contributors.
 
 To infuse an extra layer of excitement into the mix, we've introduced a special incentive. The photos that garner the most likes and tips will stand a chance to win an exclusive prize, making it an even more engaging and rewarding experience for everyone involved. So, let's continue to celebrate the spirit of Unfold 2023 by sharing and connecting through the lens of our shared experiences!
+
+
+## Why using Ethereum Push Notifications ?
+
+Our platform will use Ethereum push notifications to send real-time updates on likes, comments, dislikes, tips, and chats.
+
+This will allow users to stay connected to the content they care about and the people they want to talk to. For example, if a user likes a video, they will receive a push notification immediately. If someone comments on their video, they will also receive a push notification. This will help users to stay engaged and involved in the community.
+
+In addition to push notifications, we will also be integrating a push chat feature. This will allow users to chat with each other directly from the platform. This will make it easier for users to get to know each other and build relationships.
+
+We believe that our platform has the potential to revolutionize the way that people interact with each other online. By using Ethereum push notifications and push chat, we can create a more engaging and connected community.
+
+
