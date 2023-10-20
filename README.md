@@ -64,4 +64,9 @@ In addition to push notifications, we will also be integrating a push chat featu
 
 We believe that our platform has the potential to revolutionize the way that people interact with each other online. By using Ethereum push notifications and push chat, we can create a more engaging and connected community.
 
+## Links
+
+https://drive.google.com/drive/folders/12Nbjlag5roQI65h02HTNFUYSQDc0FpRF
+
+https://www.canva.com/design/DAFx0iIRgvE/rpKG6VGN0nSKYk6IvxNKng/edit
 
