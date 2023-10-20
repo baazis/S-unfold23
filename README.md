@@ -1,6 +1,7 @@
 # S-unfold23
 # Startup Space Dapp
 
+Note: Using Social.sol code for the presentation, all the advanced features are being implemented in Startop.sol file (explained with comments).
 
 
 ## Title: Revolutionizing Startup Collaboration
