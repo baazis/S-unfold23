@@ -91,13 +91,21 @@ https://drive.google.com/drive/folders/12Nbjlag5roQI65h02HTNFUYSQDc0FpRF
 
 https://www.canva.com/design/DAFx0iIRgvE/rpKG6VGN0nSKYk6IvxNKng/edit
 
-https://youtu.be/B_RfoP88jKQ - Deploying on Spheron
-
 https://youtu.be/YWqUp23W4Vo - Project Video
 
 ## Deployed Link on Spheron
 
+https://youtu.be/B_RfoP88jKQ - Deploying on Spheron
+
 https://s-unfold23-1bee24.spheron.app/profile/
+
+
+## Deploying on Vercel
+
+https://youtu.be/JB-shYp9ECY
+
+https://startupspace.vercel.app/
+
 
 ## Images
 
