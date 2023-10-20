@@ -21,10 +21,16 @@ contract Startup {
         string text;
     }
 
-    // Define a structure for a pitch.
+    // Define a structure for media content (video or photo).
+    struct Media {
+        string mediaHash; // IPFS hash for the media content.
+        string mediaType; // Type of media (e.g., "video" or "photo").
+    }
+
+    // Define a structure for a pitch with multiple media and comments.
     struct Pitch {
         uint id;
-        string hash; // IPFS hash for the video content.
+        Media[] media;
         string description;
         uint tipAmount;
         address payable author;
@@ -66,10 +72,10 @@ contract Startup {
     mapping(uint => Bid) public bids;
 
     // Event to log when a pitch is uploaded.
-    event PitchUploaded(uint id, string hash, string description, uint tipAmount, address author, uint timestamp, uint likes, uint dislikes, string tags);
+    event PitchUploaded(uint id, Media[] media, string description, uint tipAmount, address author, uint timestamp, uint likes, uint dislikes, string tags);
 
     // Event to log when a pitch is tipped.
-    event PitchTipped(uint id, string hash, string description, uint tipAmount, address author);
+    event PitchTipped(uint id, Media[] media, string description, uint tipAmount, address author);
 
     // Event to log when a user is registered.
     event UserRegistered(address userAddress, string username);
@@ -94,18 +100,18 @@ contract Startup {
         name = "Startop";
     }
 
-    // Function to upload a pitch.
-    function uploadPitch(string memory _videoHash, string memory _description, string memory _tags) public {
-        require(bytes(_videoHash).length > 0); // Ensure the video hash is provided.
+    // Function to upload a pitch with multiple media.
+    function uploadPitch(Media[] memory _media, string memory _description, string memory _tags) public {
+        require(_media.length > 0); // Ensure media content is provided.
         require(bytes(_description).length > 0); // Ensure the pitch description is provided.
         require(msg.sender != address(0)); // Ensure a valid sender address.
 
         pitchCount++; // Increment the pitch count.
         uint timestamp = block.timestamp; // Get the current timestamp.
-        pitches[pitchCount] = Pitch(pitchCount, _videoHash, _description, 0, msg.sender, timestamp, 0, 0, _tags, new Comment[](0), new uint[](0), new uint[](0));
+        pitches[pitchCount] = Pitch(pitchCount, _media, _description, 0, msg.sender, timestamp, 0, 0, _tags, new Comment[](0), new uint[](0), new uint[](0));
         // Create a new pitch and add it to the pitches mapping.
         users[msg.sender].contributedPitches.push(pitchCount); // Add the pitch to the user's contributed pitches.
-        emit PitchUploaded(pitchCount, _videoHash, _description, 0, msg.sender, timestamp, 0, 0, _tags);
+        emit PitchUploaded(pitchCount, _media, _description, 0, msg.sender, timestamp, 0, 0, _tags);
         // Emit an event to log the pitch upload.
     }
 
@@ -179,7 +185,35 @@ contract Startup {
         emit Commented(_pitchId, commentId, msg.sender, _text);
     }
 
-    // ... (other functions for creating teams, joining teams, placing bids, etc.)
+    // Function to create a team.
+    function createTeam(string memory _teamName) public {
+        require(bytes(_teamName).length > 0); // Ensure a valid team name is provided.
+        teamCount++; // Increment the team count.
+        teams[teamCount] = Team(teamCount, _teamName, new address[](0)); // Create a new team and add it to the teams mapping.
+    }
+
+    // Function to join a team.
+    function joinTeam(uint _teamId) public {
+        require(_teamId > 0 && _teamId <= teamCount); // Ensure a valid team ID.
+        Team storage _team = teams[_teamId]; // Get the team by ID.
+        _team.members.push(msg.sender); // Add the sender to the team's members.
+        teams[_teamId] = _team; // Update the team in the mapping.
+        emit JoinedTeam(_teamId, msg.sender); // Emit an event to log the user joining the team.
+    }
+
+    // Function to place a bid on a pitch.
+    function placeBid(uint _pitchId, string memory _comments) public {
+        require(_pitchId > 0 && _pitchId <= pitchCount); // Ensure a valid pitch ID.
+        require(bytes(_comments).length > 0); // Ensure valid bid comments.
+        bidCount++; // Increment the bid count.
+        bids[bidCount] = Bid(bidCount, _pitchId, msg.sender, _comments); // Create a new bid and add it to the bids mapping.
+        pitches[_pitchId].bids.push(bidCount); // Add the bid to the pitch's bids.
+        emit BidPlaced(bidCount, _pitchId, msg.sender, _comments); // Emit an event to log the bid placement.
+
+        NotificationPayload memory notificationPayload = NotificationPayload({
+            title: 'Your pitch was bid!',
+            body: 'User bid your pitch with the ID ' + uintToString(id) + '.'
+        });
 
     // Helper function to convert uint to string (you can implement this).
     function uintToString(uint v) internal pure returns (string memory) {
