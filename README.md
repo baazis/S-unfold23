@@ -5,6 +5,7 @@
 
 
 Note: Using Social.sol code for the presentation, all the advanced features are being implemented in Startop.sol file (explained with comments).
+Advanced feature includes (Liking, disliking, comments, bidding, push notification, push chat etc)
 
 
 ## Title: Revolutionizing Startup Collaboration
