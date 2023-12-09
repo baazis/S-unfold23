@@ -6,6 +6,8 @@ import { useEffect, useRef, useState } from "react";
 import Web3Modal from "web3modal";
 import Layout from "../components/Layout";
 import { CONTRACT_ADDRESS, abi } from "../constants";
+import { ethers } from "ethers";
+
 
 export default function Home() {
   const [loading, setLoading] = useState(false);
@@ -50,40 +52,45 @@ export default function Home() {
     }
   };
 
+  // const addPost = async () => {
+  //   try {
+  //     const signer = await getProviderOrSigner(true);
+  //     const contract = getDaoContractInstance(signer);
+  
+  //     // Ensure the description is properly encoded
+  //     const encodedDescription = ethers.utils.formatBytes32String(description);
+  
+  //     // Get the imgCID in the correct format (assuming it's a string)
+  //     const imgCID = await saveToIPFS(file);
+  
+  //     // Ensure the imgCID is properly formatted for Ethereum
+  //     const encodedImgCID = ethers.utils.formatBytes32String(imgCID);
+  
+  //     const txn = await contract.addPost(encodedDescription, encodedImgCID);
+  //     setLoading(true);
+  //     setDescription("");
+  //     setFile("");
+  //     await txn.wait();
+  //     setLoading(false);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
   const addPost = async () => {
     try {
       const signer = await getProviderOrSigner(true);
+      console.log(getDaoContractInstance)
       const contract = getDaoContractInstance(signer);
-
-      const imgCID = saveToIPFS(file);
-      //console.log(imgCID);
+      console.log("58",contract)
+      const imgCID = await saveToIPFS(file);
 
       const txn = await contract.addPost(description, imgCID);
+      console.log(txn);
       setLoading(true);
       setDescription("");
       setFile("");
       await txn.wait();
       setLoading(false);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const getPost = async (id) => {
-    try {
-      const provider = await getProviderOrSigner(false);
-      const contract = getDaoContractInstance(provider);
-
-      //const txn = await contract.getPost(id);
-      const txn = await contract.getPost(0);
-      setLoading(true);
-
-      console.log(txn);
-
-      setData(txn);
-      setLoading(false);
-
-      return txn;
     } catch (error) {
       console.log(error);
     }
@@ -97,13 +104,13 @@ export default function Home() {
     formData.append("file", file);
 
     //console.log("===>", process.env.NEXT_PUBLIC_WEB3_STORAGE_TOKEN);
-    const TOKEN = process.env.NEXT_PUBLIC_WEB3_STORAGE_TOKEN;
-    var config = {
+    const TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweEY2MGM0M0IyNENBODEyODk1NjFmMGYyMjAyMjhkNWI2Qjk0NjdmNzkiLCJpc3MiOiJuZnQtc3RvcmFnZSIsImlhdCI6MTcwMjEzMjY1NTkwMywibmFtZSI6IlNhZmVzcGFjZSJ9.erPD82HWYT3ymhyzmC03_MCZty6eDxi1Ou6h9mck9IQ';
+    const config = {
       method: "post",
-      url: "https://api.web3.storage/upload",
+      url: "https://api.nft.storage/upload",
       headers: {
         Authorization: `Bearer ${TOKEN}`,
-        "Content-Type": "text/plain",
+        "Content-Type": "multipart/form-data",
       },
       data: formData,
     };
@@ -111,8 +118,8 @@ export default function Home() {
     // Posting the form data to the IPFS API
     const response = await axios(config);
     // returning the CID
-    // console.log(response.data.cid);
-    return response.data.cid;
+    console.log(response.data.value.cid);
+    return response.data.value.cid;
   };
 
   useEffect(() => {

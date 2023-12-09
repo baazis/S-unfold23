@@ -55,14 +55,17 @@ function Profile() {
     try {
       const signer = await getProviderOrSigner(true);
       const contract = getDaoContractInstance(signer);
+      console.log("contract: ",contract)
 
       const txn = await contract.getMyPost();
+      console.log("txn: ",txn)
       setLoading(true);
 
-      //console.log(txn);
+      console.log(txn);
 
       let posts = await Promise.all(
         txn.map(async (i) => {
+          console.log("img data")
           console.log(i);
           let post = {
             auth: i.author,
