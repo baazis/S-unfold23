@@ -78,6 +78,7 @@ function Profile() {
           return post;
         })
       );
+      posts = posts.slice(-6);
 
       setPostdata(posts);
 

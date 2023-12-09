@@ -76,26 +76,6 @@ export default function Home() {
   //     console.log(error);
   //   }
   // };
-  // const addPost = async () => {
-  //   try {
-  //     const signer = await getProviderOrSigner(true);
-  //     console.log(getDaoContractInstance)
-  //     const contract = getDaoContractInstance(signer);
-  //     console.log("58",contract)
-  //     const imgCID = await saveToIPFS(file);
-
-  //     const txn = await contract.addPost(description, imgCID);
-  //     console.log(txn);
-  //     setLoading(true);
-  //     setDescription("");
-  //     setFile("");
-  //     await txn.wait();
-  //     setLoading(false);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
   const addPost = async () => {
     try {
       const signer = await getProviderOrSigner(true);
@@ -307,3 +287,6 @@ export default function Home() {
           }
         };
 */
+
+
+
