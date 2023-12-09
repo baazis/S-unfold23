@@ -44,17 +44,38 @@ function Content() {
     }
   };
 
+  // const getAllPost = async () => {
+  //   try {
+  //     const provider = await getProviderOrSigner(false);
+  //     const contract = getDaoContractInstance(provider);
+
+  //     const txn = await contract.getAllPost();
+  //     setLoading(true);
+
+  //     let posts = await Promise.all(
+  //       txn.map(async (i) => {
+  //         console.log(i);
+  //         let post = {
+  //           auth: i.author,
+  //           id: i.id,
+  //           tip: i.tipAmount,
+  //           txt: i.postTxt,
+  //           img: i.postImg,
+  //         };
+
+  //         return post;
+  //       })
+  //     );
   const getAllPost = async () => {
     try {
       const provider = await getProviderOrSigner(false);
       const contract = getDaoContractInstance(provider);
-
+  
       const txn = await contract.getAllPost();
       setLoading(true);
-
+  
       let posts = await Promise.all(
         txn.map(async (i) => {
-          console.log(i);
           let post = {
             auth: i.author,
             id: i.id,
@@ -62,19 +83,22 @@ function Content() {
             txt: i.postTxt,
             img: i.postImg,
           };
-
           return post;
         })
       );
-
+  
+      // Keep only the last 10 posts
+      posts = posts.slice(-10);
+  
       setPostdata(posts);
-
+  
       console.log(posts);
       setLoading(false);
     } catch (error) {
       console.log(error);
     }
   };
+  
 
   useEffect(() => {
     if (!walletConnected) {
@@ -117,3 +141,4 @@ function Content() {
 }
 
 export default Content;
+

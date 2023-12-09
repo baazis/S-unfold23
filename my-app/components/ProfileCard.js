@@ -50,10 +50,13 @@ export const ProfileCard = ({ img, txt, author, tip }) => {
   const getDaoContractInstance = (providerOrSigner) => {
     return new Contract(CONTRACT_ADDRESS, abi, providerOrSigner);
   };
+  
+
+  
 
   return (
     <div className="max-w-sm  bg-gradient-to-b from-blue-900 to-black rounded-lg border border-gray-200 shadow-md">
-      <img className="rounded-t-lg" src={`https://${img}.ipfs.w3s.link`} />
+      <img className="rounded-t-lg" src={`https://${img}.ipfs.w3s.link/test.png`} />
       <div className="px-3 h-30">
         <p className="text-base">{txt}</p>
       </div>

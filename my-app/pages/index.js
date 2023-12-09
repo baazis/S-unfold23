@@ -76,16 +76,32 @@ export default function Home() {
   //     console.log(error);
   //   }
   // };
+  // const addPost = async () => {
+  //   try {
+  //     const signer = await getProviderOrSigner(true);
+  //     console.log(getDaoContractInstance)
+  //     const contract = getDaoContractInstance(signer);
+  //     console.log("58",contract)
+  //     const imgCID = await saveToIPFS(file);
+
+  //     const txn = await contract.addPost(description, imgCID);
+  //     console.log(txn);
+  //     setLoading(true);
+  //     setDescription("");
+  //     setFile("");
+  //     await txn.wait();
+  //     setLoading(false);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
   const addPost = async () => {
     try {
       const signer = await getProviderOrSigner(true);
-      console.log(getDaoContractInstance)
       const contract = getDaoContractInstance(signer);
-      console.log("58",contract)
-      const imgCID = await saveToIPFS(file);
-
+      const imgCID = await saveToIPFS(file, 'test.png'); // Specify the desired filename
       const txn = await contract.addPost(description, imgCID);
-      console.log(txn);
       setLoading(true);
       setDescription("");
       setFile("");
@@ -96,30 +112,41 @@ export default function Home() {
     }
   };
 
-  const saveToIPFS = async (file) => {
-    // create a new multipart form data
-    const formData = new FormData();
-    // add file to the form data
-    //console.log("--->", file);
-    formData.append("file", file);
-
-    //console.log("===>", process.env.NEXT_PUBLIC_WEB3_STORAGE_TOKEN);
-    const TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweEY2MGM0M0IyNENBODEyODk1NjFmMGYyMjAyMjhkNWI2Qjk0NjdmNzkiLCJpc3MiOiJuZnQtc3RvcmFnZSIsImlhdCI6MTcwMjEzMjY1NTkwMywibmFtZSI6IlNhZmVzcGFjZSJ9.erPD82HWYT3ymhyzmC03_MCZty6eDxi1Ou6h9mck9IQ';
-    const config = {
-      method: "post",
-      url: "https://api.nft.storage/upload",
-      headers: {
-        Authorization: `Bearer ${TOKEN}`,
-        "Content-Type": "multipart/form-data",
-      },
-      data: formData,
-    };
-
-    // Posting the form data to the IPFS API
-    const response = await axios(config);
-    // returning the CID
-    console.log(response.data.value.cid);
-    return response.data.value.cid;
+  const saveToIPFS = async (file, filename) => {
+    try {
+      // create a new multipart form data
+      const formData = new FormData();
+      // add file to the form data
+      formData.append("file", file, filename); // Append the file with the specified filename
+  
+      const TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweEY2MGM0M0IyNENBODEyODk1NjFmMGYyMjAyMjhkNWI2Qjk0NjdmNzkiLCJpc3MiOiJuZnQtc3RvcmFnZSIsImlhdCI6MTcwMjEzMjY1NTkwMywibmFtZSI6IlNhZmVzcGFjZSJ9.erPD82HWYT3ymhyzmC03_MCZty6eDxi1Ou6h9mck9IQ';
+      const config = {
+        method: "post",
+        url: "https://api.nft.storage/upload",
+        headers: {
+          Authorization: `Bearer ${TOKEN}`,
+          "Content-Type": "multipart/form-data",
+        },
+        data: formData,
+      };
+  
+      const response = await axios(config);
+      if (response.headers && response.headers['content-disposition']) {
+        const contentDisposition = response.headers['content-disposition'];
+        const filenameMatch = contentDisposition.match(/filename="(.+)"/);
+        const filename = filenameMatch ? filenameMatch[1] : null;
+  
+        console.log('Filename:', filename);
+      } else {
+        console.warn('Content-Disposition header not found in response');
+      }
+  
+      console.log("CID value:", response.data.value.cid);
+      return response.data.value.cid;
+    } catch (error) {
+      console.error('Error uploading file to IPFS:', error);
+      throw error;
+    }
   };
 
   useEffect(() => {

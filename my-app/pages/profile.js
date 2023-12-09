@@ -88,6 +88,8 @@ function Profile() {
     }
   };
 
+  
+
   useEffect(() => {
     if (!walletConnected) {
       web3ModalRef.current = new Web3Modal({
